@@ -1,0 +1,40 @@
+<header id="site-header">
+    <nav class="top-navigation">
+      <div>
+        <div class="navigation">
+          <a class="skip-link" href="#main-content">Skip to main content</a>
+          <a {% if page.fileSlug == 'pull_requests' %}class="active"{% endif %} href="/contributing">Contributing</a>
+          <a href="https://blog.adafruit.com/category/circuitpython">News</a>
+          <a href="https://www.adafruitdaily.com/category/circuitpython">Newsletter</a>
+          <a href="https://docs.circuitpython.org/">Documentation</a>
+          <a href="https://forums.adafruit.com/viewforum.php?f=60">Forums</a>
+          <a href="https://adafru.it/discord" aria-label="Discord"><i class="fab fa-discord"></i> Discord</a>
+          <a href="/feed.rss" type="application/rss+xml" aria-label="RSS Feed"><i class="fas fa-rss-square"></i> RSS</a>
+        </div>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <div class="content">
+        <nav class="site-brand">
+          <div class="site-logo">
+            <a href="/">
+              <img src="/assets/images/logo.png"
+                   srcset="/assets/images/logo.png 1x,
+                          /assets/images/logo@2x.png 2x,
+                          /assets/images/logo@3x.png 3x"
+                          alt="CircuitPython Logo" height="60" width="136">
+            </a>
+          </div>
+          <div class="site-navigation">
+            <a {% if page.fileSlug == 'downloads' %}class="active" aria-current="page"{% endif %} href="/downloads/?sort-by=downloads">Downloads</a>
+            <a {% if page.fileSlug == 'libraries' %}class="active" aria-current="page"{% endif %} href="/libraries">Libraries</a>
+            <a {% if page.fileSlug == 'blinka' %}class="active" aria-current="page"{% endif %} href="/blinka">Blinka</a>
+          </div>
+          <div class="get-started">
+            <a href="https://learn.adafruit.com/welcome-to-circuitpython">Get Started</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="bottom-bar"></div>
+  </header>

@@ -1,0 +1,212 @@
+#download-page {
+  padding: 50px 0 200px 0;
+  display: grid;
+    grid-template-columns:
+      [full-start] minmax(1em, 1fr)
+      [main-start] minmax(0, 80em) [main-end]
+      minmax(1em, 1fr) [full-end];
+    grid-row-gap: 0.5em;
+
+  &> * {
+    grid-column: main;
+  }
+
+  h1, h3 {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+  }
+
+  .download-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    grid-auto-rows: minmax(min-content, max-content);
+
+    .section {
+      border: 1px solid #cecece;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 1em;
+    }
+
+    .details {
+      img {
+        width: 100%;
+      }
+    }
+
+    .download {
+      a.download-button, a.download-button-unrecommended, button[is="cp-install-button"] {
+        display: inline-block;
+        width: auto;
+        padding: 15px 30px 15px 30px;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+
+        i {
+          padding-left: 10px;
+        }
+      }
+
+      .download-details {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .language-select {
+        float: left;
+        margin-right: 1em;
+        border-radius: 5px;
+        border: 2px solid $gray;
+        overflow: hidden;
+        height: 45px;
+        position: relative;
+        display: block;
+      }
+
+      select{
+        height: 45px;
+        width: 100%;
+        padding: 5px;
+        border: 0;
+        font-size: 16px;
+       -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+      .language-select:after {
+        content: "\f0dc";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        padding: 15px 8px;
+        position: absolute; right: 0; top: 0;
+        background: #fff;
+        z-index: 1;
+        text-align: center;
+        width: 15%;
+        height: 100%;
+        pointer-events: none;
+        box-sizing: border-box;
+      }
+
+      .stable {
+        .language-select {
+            border-color: $purple;
+        }
+        .language-select:after {
+            color: $purple;
+        }
+        a.download-button, a.download-button-unrecommended {
+          background-color: $purple;
+        }
+
+        .download-modules {
+            color: $purple;
+        }
+      }
+
+      .unstable {
+        .language-select {
+            border-color: $purple;
+        }
+          .language-select:after {
+              color: $purple;
+          }
+
+        a.download-button, a.download-button-unrecommended {
+          background-color: $purple;
+        }
+        a.download-button:hover, a.download-button-unrecommended:hover {
+          background-color: $purple;
+        }
+        .download-modules {
+            color: $purple;
+        }
+      }
+
+      .unrecommended {
+          .language-select:after {
+              color: $purple;
+          }
+
+        a.download-button, a.download-button-unrecommended {
+          background-color: $purple;
+        }
+      }
+
+      button[is="cp-install-button"] {
+        color: $purple;
+        background-color: transparent;
+        border: 2px solid $purple;
+      }
+
+      .download-buttons {
+        a, button {
+          width: 100%;
+          height: 49px;
+          padding: 0;
+          text-align: center;
+          line-height: 49px;
+          margin-bottom: 1em;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .previous-versions-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        a, button {
+          margin-bottom: 1em;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-lg) {
+  #download-page .download-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: $screen-md) {
+  #download-page {
+    .download-section {
+      grid-template-columns: 1fr 1fr;
+
+      .download {
+        .download-details {
+          grid-template-columns: repeat(1, 1fr);
+        }
+
+        .language-select {
+          margin-right: 0;
+          margin-bottom: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  #download-page .download-section {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,5 @@
+{
+    "layout":"download.njk",
+    "tags": "board",
+    "permalink": "/board/{{board_id | slugify}}/"
+}

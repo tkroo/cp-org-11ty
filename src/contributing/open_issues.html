@@ -1,0 +1,56 @@
+---
+layout: contributing
+title: Contributing - Open Issues
+permalink: /contributing/open-issues
+---
+
+<div class="libraries open-issues">
+  {% comment %}
+    create labels array by looping through labels of each issue
+    ensuring unique for select list
+  {% endcomment %}
+  {% assign labels = "All" | split: "," %}
+  {% for library in site.data.libraries.open_issues %}
+    {% for issue in library[1] %}
+        {% for label in issue.labels %}
+          {% assign labels = labels | uniq %}
+        {% endfor %}
+    {% endfor %}
+  {% endfor %}
+  <p>
+    Sort by issue labels
+    <select>
+      {% for label in labels %}
+        {% assign lowerlabel = label | downcase %}
+        {% assign ddlabels = ddlabels | uniq %}
+      {% endfor %}
+      {% for label in ddlabels %}
+        <option value='{{ label | replace: ' ', '-' }}'>{{ label | capitalize }}</option>
+      {% endfor %}
+    <select>
+  </p>
+  <h3>Open Issues</h3>
+  <ul>
+    {% for library in site.data.libraries.open_issues %}
+      <li>
+        {{library[0]}}
+        <ul class="issues-list">
+        {% for issue in library[1] %}
+        {% capture classes %}
+        {% for label in issue.labels %}
+          {{ label | downcase | replace: ' ', '-' }}
+        {% endfor %}
+        {% endcapture %}
+        <li class="{{ classes | strip }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
+            {% for label in issue.labels %}
+              {% if label != 'None' %}
+                <span class="issue-label tag-{{ label | downcase | replace: ' ', '-' }}">{{label}}</span>
+              {% endif %}
+            {% endfor %}
+        </li>
+        {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,5 @@
+{
+    "layout":"download.njk",
+    "tags": "blinka",
+    "permalink": "/blinka/{{board_id | slugify}}/"
+}

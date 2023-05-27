@@ -1,0 +1,48 @@
+body  {
+  font-family: "Proxima Nova","Montserrat","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+    background-color: #ebebeb;
+}
+
+a {
+  text-decoration: none;
+}
+
+.clear {
+  clear: both;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 500;
+}
+
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+a.purple-button-link {
+  display: inline-block;
+  width: auto;
+  padding: 15px 30px 15px 30px;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  background-color: $purple;
+
+  i {
+    padding-left: 10px;
+  }
+}
+
+fieldset {
+    border: 0;
+
+    legend {
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+}
+
+input.filter-checkbox, label {
+    cursor: pointer;
+}

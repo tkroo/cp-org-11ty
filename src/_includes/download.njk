@@ -1,0 +1,34 @@
+---
+layout: layout.njk
+---
+{%- set info = files | findme(board_id) -%}
+{%- set board = data -%}
+<div id="download-page">
+  <h1>{{ name }}</h1>
+  <h3>by {{ manufacturer }}</h3>
+
+  <div class="download-section">
+    <div class="details">
+      <div class="section">
+        <img src="/assets/images/boards/large/{{ board_image }}" alt="Image of Board" />
+        <p>
+          {{ content | safe }}
+        </p>
+        <h2>Contribute</h2>
+          <p>Have some info to add for this board? Edit the source for this page <a href="https://github.com/adafruit/circuitpython-org/edit/main/{{ page.path }}">here</a>.</p>
+      </div>
+    </div>
+    <div class="download">
+      {% if blinka %}
+        {% include "download/blinka.html" %}
+      {% else %}
+        {% include "download/board_new.njk" %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if family == 'esp32' or family == 'esp32s2' or family == 'esp32c3' or family == 'esp32s3' %}
+<script src="https://cdn.jsdelivr.net/gh/adafruit/web-firmware-installer-js@latest/dist/cpinstaller.min.js" type="module"></script>
+{% endif %}
+<script src="/assets/javascript/download.js"></script>
