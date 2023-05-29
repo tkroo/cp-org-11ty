@@ -6,4 +6,4 @@ Requires node.js
 To preview the site, clone this repo, then run:  
 ```npm install```  
 ```npm run dev```  
-then open [localhost:8081](http://localhost:8081/) in your browser.  
+then open the provided url in your browser.  
