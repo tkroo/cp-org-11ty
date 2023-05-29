@@ -4,9 +4,11 @@ title: Downloads
 permalink: /downloads/
 excerpt: CircuitPython supported boards.
 pagination:
-    data: collections.board
+    data: collections.filteredBoards
     size: 5000
+    alias: boardlist
 ---
+    {# data: collections.filesInBoards #}
 
 <div id="downloads-page">
   <h1>Downloads</h1>
@@ -63,44 +65,38 @@ pagination:
     </div>
   </div>
   
-  {# merge objects #}
-  {% set merged = [] %}
-  {% for board in collections.board %}
-  {%- set info = files | findme(board.data.board_id) -%}
-  {% set merged = merged.concat(board | mergeData(info)) %}
-  {% endfor %}
+  {# {% set myCollection = collections.boardsInFiles %} #}
+  {# {% set myCollection = collections.filesInBoards %} #}
   <div class="download-count">
-    Displaying <span id="board_count">{{ merged | length }}</span> boards.
+    Displaying <span id="board_count">{{ boardlist | length }}</span> boards.
   </div>
   <div class="downloads-section">
-    {%- for board in merged | sort(false, false, "board.data.id") -%}
-    {% if board.data.manufacturer | lower != 'unknown' and board.content | length > 0 %}
+    {%- for board in boardlist -%}
       <div class="download" data-id="{{ board.data.board_id }}"
-                            data-name="{{ board.data.name | default(info.id, true) }}"
-                            data-downloads="{{ board.downloads }}"
-                            data-manufacturer="{{ board.data.manufacturer }}"
+                            data-name="{{ board.data.name | default(board.id, true) }}"
+                            data-downloads="{{ board.info.downloads | default("0", true) }}"
+                            data-manufacturer="{{ board.data.manufacturer | default("Unknown", true) }}"
                             data-mcufamily="{{ board.data.family }}"
                             data-features="{{ board.data.features }}"
                             data-tags="{{ board.data.tags }}"
-                            data-modules="{{ board.versions[0].modules }}"
+                            data-modules="{{ board.info.versions[0].modules | default(board.versions[0].modules, true) }}"
                             data-date="{{ board.data.date_added }}">
-        <a href="/board/{{ board.data.board_id | slugify }}">
+        <a href="/board/{{ board.data.board_id | default(board.id, true) | slugify }}">
           <div>
             <div class="img-responsive-4by3">
-              <img srcset="/assets/images/boards/small/{{board.data.board_image}} 300w,
-                /assets/images/boards/large/{{ board.data.board_image }} 700w"
+              <img srcset="/assets/images/boards/small/{{board.data.board_image | default("unknown.jpg", true) }} 300w,
+                /assets/images/boards/large/{{ board.data.board_image | default("unknown.jpg", true) }} 700w"
                 sizes="(max-width: 1024px) 700px, 300px"
-                src="/assets/images/boards/small/{{ board.data.board_image }}" alt="{{board.data.name}}" loading="lazy" />
+                src="/assets/images/boards/small/{{ board.data.board_image | default("unknown.jpg", true) }}" alt="{{board.data.name | default(board.id ,true) }}" loading="lazy" />
             </div>
             <div class="details">
-              <h3 {% if board.content | length == 0 %} style='border:12px solid red' {% endif %}>{{ board.data.name }}</h3>
-              <strong>By</strong> {{ board.data.manufacturer }}<br>
-              <strong>downloads:</strong> {{ board.downloads }}
+              <h3>{{ board.data.name | default(board.id, true)}}</h3>
+              <strong>By</strong> {{ board.data.manufacturer| default("Unknown", true) }}<br>
+              <strong>downloads:</strong> {{ board.info.downloads | default("0", true) }}
             </div>
           </div>
         </a>
       </div>
-      {% endif %}
     {% endfor %}
 
       

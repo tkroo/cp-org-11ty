@@ -31,30 +31,38 @@ module.exports = function(eleventyConfig) {
         return slugify(value, '_');
     })
 
-    eleventyConfig.addFilter("combinedata", function(obj, value) {
-        obj.data["downloads"] = value+""
-        return obj
+    eleventyConfig.addCollection("missingMDfiles", function(collectionApi) {
+        const c1 = collectionApi.getFilteredByTag("board");
+        const c2 = collectionApi.getAll()[0].data.files;
+
+        return c2.filter(function(item) {
+            return !c1.find(x => (x.data.board_id === item.id || x.data.board_alias === item.id));
+        })
     })
 
-    eleventyConfig.addFilter("mergeData", function(obj, obj2) {
-        const obj3 = _.merge(obj, obj2);
-        return obj3;
-    })
+    eleventyConfig.addCollection("filteredBoards", function(collectionApi) {
+        const c1 = collectionApi.getFilteredByTag("board");
+        const c2 = collectionApi.getAll()[0].data.files;
 
-    // eleventyConfig.addCollection("boardswithdownloads", function (collectionApi) {
-    //     const a = collectionApi.getFilteredByTag("board");
-    //     const b = collectionApi.getAll()[0].data.files;
-    //     const c = a.map(x => {
-    //         dl = b.find(y => y.id === x.data.board_id);
-    //         console.log("dl:", dl.downloads);
-    //         return {
-    //             ...x,
-    //             downloads: dl.downloads | 0
-    //         }
-    //     })
-    //     console.log("c:", c);
-    //     return c
-    // });
+        const hasMarkdownAndBoardImage = c1.filter(function(item) {
+            return item.data.board_image != "unknown.jpg";
+        });
+
+        const addFileInfo = c1.map(item => {
+            item.info = c2.find(x => x.id === item.data.board_id || x.id === item.data.board_alias);
+            return item;
+        })
+
+        const onlyInFilesJSON = c2.filter(function(item) {
+            return !c1.find(x => (x.data.board_id === item.id || x.data.board_alias === item.id));
+        })
+
+        const allItems = hasMarkdownAndBoardImage.concat(onlyInFilesJSON);
+        return allItems
+    });
+
+
+
     return {
         dir: {
             input: "src",
