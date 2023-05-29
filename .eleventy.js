@@ -31,6 +31,14 @@ module.exports = function(eleventyConfig) {
         return slugify(value, '_');
     })
 
+    eleventyConfig.addFilter("sortByDownloads", function(arr) {
+        return arr.filter(x => x.info).sort((a, b) => {
+            if (a?.info.downloads < b?.info.downloads) return 1;
+            if (a?.info.downloads > b?.info.downloads) return -1;
+            return 0;
+        }).concat(arr.filter(x => !x.info))
+    })
+
     eleventyConfig.addCollection("missingMDfiles", function(collectionApi) {
         const c1 = collectionApi.getFilteredByTag("board");
         const c2 = collectionApi.getAll()[0].data.files;

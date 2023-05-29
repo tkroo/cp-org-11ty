@@ -71,7 +71,7 @@ pagination:
     Displaying <span id="board_count">{{ boardlist | length }}</span> boards.
   </div>
   <div class="downloads-section">
-    {%- for board in boardlist -%}
+    {%- for board in boardlist | sortByDownloads -%}
       <div class="download" data-id="{{ board.data.board_id }}"
                             data-name="{{ board.data.name | default(board.id, true) }}"
                             data-downloads="{{ board.info.downloads | default("0", true) }}"
