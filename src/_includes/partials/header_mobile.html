@@ -20,16 +20,16 @@
     <nav id="mobile-menu-contents" role="navigation" class="hidden"
       aria-expanded="false" aria-label="Mobile Menu">
       <ul>
-        <li><a {% if current[1] == 'downloads' %}class='active'{% endif %}
+        <li><a {% if page.fileSlug == 'downloads' %}class='active'{% endif %}
                                   href="/downloads">Downloads</a></li>
-        <li><a {% if current[1] == 'libraries' %}class='active'{% endif %}
+        <li><a {% if page.fileSlug == 'libraries' %}class='active'{% endif %}
                                   href="/libraries">Libraries</a></li>
-        <li><a {% if current[1] == 'blinka' %}class='active'{% endif %}
+        <li><a {% if page.fileSlug == 'blinka' %}class='active'{% endif %}
                                   href="/blinka">Blinka</a></li>
-        <li><a {% if current[1] == 'contributing' %}class='active'{% endif %}
+        <li><a {% if page.fileSlug == 'contributing' %}class='active'{% endif %}
                                   href="/contributing">Contributing</a></li>
         <li><a href="https://blog.adafruit.com/category/circuitpython">News</a></li>
-        <li><a {% if current[1] == 'awesome' %}class='active'{% endif %}
+        <li><a {% if page.fileSlug == 'awesome' %}class='active'{% endif %}
                                   href="/awesome">Awesome</a></li>
         <li><a href="https://www.adafruitdaily.com/category/circuitpython">Newsletter</a></li>
         <li><a href="https://learn.adafruit.com/welcome-to-circuitpython">Get Started</a></li>
