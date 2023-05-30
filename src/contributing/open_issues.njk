@@ -6,7 +6,7 @@ permalink: /contributing/open-issues
 
 <div class="libraries open-issues">
   <p>
-    Sort by issue labels
+    Filter by issue labels
     <select>
       {% for label in collections.issueLabels %}
         <option value="{{ label | lower | replace(' ','-') }}">{{ label | capitalize }}</option>
