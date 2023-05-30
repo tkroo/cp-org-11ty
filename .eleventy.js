@@ -4,10 +4,15 @@
 
 const slugify = require('slugify');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
+const { Buffer } = require("node:buffer");
+const minifyHtml = require("@minify-html/node");
+const useMinifyHtml = false
 
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(pluginRss);
+    
+    
     eleventyConfig.addPassthroughCopy({
         "src/_assets/images/favicon.ico": "favicon.ico",
         "src/_assets/css": "assets/css",
@@ -15,10 +20,12 @@ module.exports = function(eleventyConfig) {
         "src/_assets/javascript": "assets/javascript",
         "src/awesome-circuitpython": "awesome-circuitpython",
     });
-
+    
+    // don't process these templates
     eleventyConfig.ignores.add("src/awesome-circuitpython/contributing.md");
     eleventyConfig.ignores.add("src/awesome-circuitpython/CODE_OF_CONDUCT.md");
     eleventyConfig.ignores.add("src/awesome-circuitpython/cheatsheet/Circuitpython_Cheatsheet.md");
+    
 
     eleventyConfig.addFilter("findme", function(arr, value) {
         return arr.find(x => x.id === value);
@@ -47,7 +54,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addCollection("issueLabels", function(collectionApi) {
         const c1 = collectionApi.getAll()[0].data.libraries;
         const libs = Object.keys(c1.open_issues);
-        const labels = [];
+        const labels = ["All"];
         const a = libs.forEach((x) => {
             c1.open_issues[x].forEach((y) => {
                 labels.push(...y.labels);
@@ -87,7 +94,22 @@ module.exports = function(eleventyConfig) {
         return allItems
     });
 
-
+    if (useMinifyHtml) {
+        // TRANSFORM -- Minify HTML Output
+        eleventyConfig.addTransform("minifyHtml", function (content, outputPath) {
+          if (outputPath && outputPath.endsWith(".html")) {
+            let minified = minifyHtml.minify(Buffer.from(content), {
+              do_not_minify_doctype: true,
+              keep_html_and_head_opening_tags: true,
+              ensure_spec_compliant_unquoted_attribute_values: true,
+              keep_spaces_between_attributes: true,
+              keep_comments: false
+            });
+            return minified;
+          }
+          return content;
+        });
+      }
 
     return {
         dir: {

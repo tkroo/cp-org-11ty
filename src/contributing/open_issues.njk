@@ -9,7 +9,7 @@ permalink: /contributing/open-issues
     Sort by issue labels
     <select>
       {% for label in collections.issueLabels %}
-        <option value="{{ label | replace(' ','-') }}">{{ label | capitalize }}</option>
+        <option value="{{ label | lower | replace(' ','-') }}">{{ label | capitalize }}</option>
       {% endfor %}
     <select>
   </p>
@@ -24,10 +24,12 @@ permalink: /contributing/open-issues
         {% for label in issue.labels %}
           {{ label | lower | replace(' ', '-') }}
         {% endfor %}
-        {% endset %} #}
-        <li class="{{ issue.labels | join(",") }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
+        {% endset %}
+        {{ classes | log }} #}
+        <li class="{{ issue.labels | join(" ") | lower }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
             {% for label in issue.labels %}
-              {% if label != 'None' %}
+             {% set label = label | lower | replace(' ', '-') %}
+              {% if label != 'none' %}
                 <span class="issue-label tag-{{ label | lower | replace(' ', '-') }}">{{label}}</span>
               {% endif %}
             {% endfor %}
