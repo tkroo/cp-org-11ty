@@ -2,22 +2,18 @@
 permalink: /feed.rss
 eleventyExcludeFromCollections: true
 date: Last Modified
-metadata:
-    title: "CircuitPython.org"
-    url: "https://circuitpython.org/"
-    language: "en"
-    description: "A list of CircuitPython and Blinka supported boards"
+description: "The easiest way to program microcontrollers"
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
   <channel>
-    <title>{{ metadata.title }}</title>
-    <link>{{ metadata.url }}</link>
+    <title>{{ site.title }}</title>
+    <link>{{ site.url }}</link>
     <lastBuildDate>{{ page.date | dateToRfc822 }}</lastBuildDate>
-    <description>{{ metadata.description }}</description>
-    <language>{{ metadata.language }}</language>
+    <description>{{ site.feed_description }}</description>
+    <language>{{ site.language }}</language>
     {%- for post in collections.board | reverse %}
-    {%- set absolutePostUrl = post.url | absoluteUrl(metadata.url) %}
+    {%- set absolutePostUrl = post.url | absoluteUrl(site.url) %}
     <item>
       <title>{{ post.data.name }}</title>
       <link>{{ absolutePostUrl }}</link>

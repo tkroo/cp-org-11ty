@@ -3,7 +3,7 @@
       <div>
         <div class="navigation">
           <a class="skip-link" href="#main-content">Skip to main content</a>
-          <a {% if page.fileSlug == 'pull_requests' %}class="active"{% endif %} href="/contributing">Contributing</a>
+          <a {% if page.filePathStem.includes('contributing') %}class="active"{% endif %} href="/contributing">Contributing</a>
           <a href="https://blog.adafruit.com/category/circuitpython">News</a>
           <a {% if page.fileSlug == 'awesome' %}class='active'{% endif %} href="/awesome">Awesome</a>
           <a href="https://www.adafruitdaily.com/category/circuitpython">Newsletter</a>
@@ -27,9 +27,9 @@
             </a>
           </div>
           <div class="site-navigation">
-            <a {% if page.fileSlug == 'downloads' %}class="active" aria-current="page"{% endif %} href="/downloads/?sort-by=downloads">Downloads</a>
-            <a {% if page.fileSlug == 'libraries' %}class="active" aria-current="page"{% endif %} href="/libraries">Libraries</a>
-            <a {% if page.fileSlug == 'blinka' %}class="active" aria-current="page"{% endif %} href="/blinka">Blinka</a>
+            <a {%- if page.fileSlug == 'downloads' -%}class="active" aria-current="page"{%- endif %} href="/downloads/?sort-by=downloads">Downloads</a>
+            <a {%- if page.fileSlug == 'libraries' -%}class="active" aria-current="page"{%- endif %} href="/libraries">Libraries</a>
+            <a {%- if page.fileSlug == 'blinka' -%}class="active" aria-current="page"{%- endif %} href="/blinka">Blinka</a>
           </div>
           <div class="get-started">
             <a href="https://learn.adafruit.com/welcome-to-circuitpython">Get Started</a>
