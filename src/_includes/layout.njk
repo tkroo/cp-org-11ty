@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% include "partials/head.html" %}
-    <body>
-        {% include "partials/header.html" %}
-        {% include "partials/header_mobile.html" %}
-        <div id="main-content" class="wrapper">
-            {{ content | safe }}
-        </div>
-    </body>
+{% include "partials/head.njk" %}
+  <body>
+    {% include "partials/header.html" %}
+    {% include "partials/header_mobile.html" %}
+    <div id="main-content" class="wrapper">
+    {{ content | safe }}
+    </div>
+  </body>
 </html>
