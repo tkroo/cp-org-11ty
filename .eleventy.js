@@ -3,9 +3,8 @@
 */
 
 const slugify = require('slugify');
-const _ = require('lodash');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
-const { URL } = require("url");
+
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(pluginRss);
@@ -14,11 +13,12 @@ module.exports = function(eleventyConfig) {
         "src/_assets/css": "assets/css",
         "src/_assets/images": "assets/images",
         "src/_assets/javascript": "assets/javascript",
+        "src/awesome-circuitpython": "awesome-circuitpython",
     });
 
-    // eleventyConfig.addFilter("absoluteUrl", (path) => {
-    //     return new URL(path, metadata.url).toString();
-    // });
+    eleventyConfig.ignores.add("src/awesome-circuitpython/contributing.md");
+    eleventyConfig.ignores.add("src/awesome-circuitpython/CODE_OF_CONDUCT.md");
+    eleventyConfig.ignores.add("src/awesome-circuitpython/cheatsheet/Circuitpython_Cheatsheet.md");
 
     eleventyConfig.addFilter("findme", function(arr, value) {
         return arr.find(x => x.id === value);
@@ -27,6 +27,11 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addFilter("relative_url", function(value) {
         return value
     })
+
+    eleventyConfig.addFilter("dump", function(value) {
+        return JSON.stringify(value)
+    })
+
     eleventyConfig.addFilter("slugify", function(value) {
         return slugify(value, '_');
     })
@@ -38,6 +43,19 @@ module.exports = function(eleventyConfig) {
             return 0;
         }).concat(arr.filter(x => !x.info))
     })
+
+    eleventyConfig.addCollection("issueLabels", function(collectionApi) {
+        const c1 = collectionApi.getAll()[0].data.libraries;
+        const libs = Object.keys(c1.open_issues);
+        const labels = [];
+        const a = libs.forEach((x) => {
+            c1.open_issues[x].forEach((y) => {
+                labels.push(...y.labels);
+            })
+        })
+        const output = [...new Set(labels)]
+        return output
+    });
 
     eleventyConfig.addCollection("missingMDfiles", function(collectionApi) {
         const c1 = collectionApi.getFilteredByTag("board");
@@ -52,7 +70,7 @@ module.exports = function(eleventyConfig) {
         const c1 = collectionApi.getFilteredByTag("board");
         const c2 = collectionApi.getAll()[0].data.files;
 
-        const hasMarkdownAndBoardImage = c1.filter(function(item) {
+        const hasMDAndImage = c1.filter(function(item) {
             return item.data.board_image != "unknown.jpg";
         });
 
@@ -65,7 +83,7 @@ module.exports = function(eleventyConfig) {
             return !c1.find(x => (x.data.board_id === item.id || x.data.board_alias === item.id));
         })
 
-        const allItems = hasMarkdownAndBoardImage.concat(onlyInFilesJSON);
+        const allItems = hasMDAndImage.concat(onlyInFilesJSON);
         return allItems
     });
 
