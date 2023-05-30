@@ -72,27 +72,28 @@ pagination:
   </div>
   <div class="downloads-section">
     {%- for board in boardlist | sortByDownloads -%}
-      <div class="download" data-id="{{ board.info.id }}"
-                            data-name="{{ board.data.name | default(board.id, true) }}"
+    {% set board_id = board.data.board_id | default(board.id, true) %}
+      <div class="download" data-id="{{ board_id }}"
+                            data-name="{{ board.data.name | default(board_id, true) }}"
                             data-downloads="{{ board.info.downloads | default("0", true) }}"
-                            data-manufacturer="{{ board.data.manufacturer | default("Unknown", true) }}"
+                            data-manufacturer="{{ board.data.manufacturer | default("unknown", true) }}"
                             data-mcufamily="{{ board.data.family }}"
                             data-features="{{ board.data.features }}"
                             data-tags="{{ board.data.tags }}"
                             data-modules="{{ board.info.versions[0].modules | default(board.versions[0].modules, true) }}"
                             data-date="{{ board.data.date_added }}">
-        <a href="/board/{{ board.data.board_id | default(board.id, true) | slugify }}">
+        <a href="/board/{% if board.data.manufacturer == undefined %}unknown/?unknown_id={% endif %}{{ board_id | slugify }}">
           <div>
             <div class="img-responsive-4by3">
               <img srcset="/assets/images/boards/small/{{board.data.board_image | default("unknown.jpg", true) }} 300w,
                 /assets/images/boards/large/{{ board.data.board_image | default("unknown.jpg", true) }} 700w"
                 sizes="(max-width: 1024px) 700px, 300px"
-                src="/assets/images/boards/small/{{ board.data.board_image | default("unknown.jpg", true) }}" alt="{{board.data.name | default(board.id ,true) }}" loading="lazy" />
+                src="/assets/images/boards/small/{{ board.data.board_image | default("unknown.jpg", true) }}" alt="{{board.data.name | default(board.info.id ,true) }}" loading="lazy" />
             </div>
             <div class="details">
               <h3>{{ board.data.name | default(board.id, true)}}</h3>
               <strong>By</strong> {{ board.data.manufacturer| default("Unknown", true) }}
-              {% if board.data.downloads_display %}<br><strong>downloads:</strong> {{ board.info.downloads | default("0", true) }} {% endif %}
+              <br><strong>downloads:</strong> {{ board.info.downloads | default("0", true) }}
             </div>
           </div>
         </a>
