@@ -1,0 +1,15 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+metadata:
+    url: "https://circuitpython.org"
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for page in collections.all %}
+  <url>
+    <loc>{{ metadata.url }}{{ page.url | url }}</loc>
+    <lastmod>{{ page.date.toISOString() }}</lastmod>
+  </url>
+{%- endfor %}
+</urlset>
