@@ -20,14 +20,13 @@ permalink: /contributing/open-issues
         {{ key }}
         <ul class="issues-list">
         {% for issue in library %}
-        {# {% set classes %}
-        {% for label in issue.labels %}
+        {% set classes %}
+        {% for label in issue.labels | sort() %}
           {{ label | lower | replace(' ', '-') }}
         {% endfor %}
         {% endset %}
-        {{ classes | log }} #}
-        <li class="{{ issue.labels | join(" ") | lower }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
-            {% for label in issue.labels %}
+        <li class="{{ classes }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
+            {% for label in issue.labels | sort() %}
              {% set label = label | lower | replace(' ', '-') %}
               {% if label != 'none' %}
                 <span class="issue-label tag-{{ label | lower | replace(' ', '-') }}">{{label}}</span>
