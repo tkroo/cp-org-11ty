@@ -8,3 +8,4 @@ _drafts/
 vendor
 .idea
 node_modules
+.cache
