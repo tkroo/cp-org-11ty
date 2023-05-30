@@ -1,7 +1,7 @@
 ---
 layout: layout
 title: Downloads
-permalink: /downloads/
+permalink: /downloads.html
 excerpt: CircuitPython supported boards.
 pagination:
     data: collections.filteredBoards
@@ -72,7 +72,7 @@ pagination:
   </div>
   <div class="downloads-section">
     {%- for board in boardlist | sortByDownloads -%}
-      <div class="download" data-id="{{ board.data.board_id }}"
+      <div class="download" data-id="{{ board.info.id }}"
                             data-name="{{ board.data.name | default(board.id, true) }}"
                             data-downloads="{{ board.info.downloads | default("0", true) }}"
                             data-manufacturer="{{ board.data.manufacturer | default("Unknown", true) }}"
@@ -91,8 +91,8 @@ pagination:
             </div>
             <div class="details">
               <h3>{{ board.data.name | default(board.id, true)}}</h3>
-              <strong>By</strong> {{ board.data.manufacturer| default("Unknown", true) }}<br>
-              <strong>downloads:</strong> {{ board.info.downloads | default("0", true) }}
+              <strong>By</strong> {{ board.data.manufacturer| default("Unknown", true) }}
+              {% if board.data.downloads_display %}<br><strong>downloads:</strong> {{ board.info.downloads | default("0", true) }} {% endif %}
             </div>
           </div>
         </a>

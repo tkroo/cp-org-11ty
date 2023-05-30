@@ -1,7 +1,7 @@
 ---
 layout: common
 title: Awesome
-permalink: /awesome/
+permalink: /awesome.html
 ---
 
 <div id="awesome-page">
