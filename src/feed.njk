@@ -1,21 +1,19 @@
----json
-{
-  "permalink": "feed.rss",
-  "eleventyExcludeFromCollections": true,
-  "metadata": {
-    "title": "CircuitPython.org",
-    "url": "https://circuitpython.org/",
-    "language": "en",
-    "description": "A list of CircuitPython and Blinka supported boards"
-  }
-}
+---
+permalink: /feed.rss
+eleventyExcludeFromCollections: true
+date: Last Modified
+metadata:
+    title: "CircuitPython.org"
+    url: "https://circuitpython.org/"
+    language: "en"
+    description: "A list of CircuitPython and Blinka supported boards"
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:base="{{ metadata.url }}" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0">
   <channel>
     <title>{{ metadata.title }}</title>
     <link>{{ metadata.url }}</link>
-    <atom:link href="{{ permalink | absoluteUrl(metadata.url) }}" rel="self" type="application/rss+xml" />
+    <lastBuildDate>{{ page.date | dateToRfc822 }}</lastBuildDate>
     <description>{{ metadata.description }}</description>
     <language>{{ metadata.language }}</language>
     {%- for post in collections.board | reverse %}
