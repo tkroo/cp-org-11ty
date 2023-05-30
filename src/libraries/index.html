@@ -162,22 +162,22 @@ permalink: /libraries/
       Find out more about how you can
       <a href="/contributing" title="Contributing Page">contribute to CircuitPython libraries</a>.
     </p>
-    <h2>Library Activity for Week of  {{ site.data.libraries.updated_at | date: "%a, %b %d, %Y" }}</h2>
+    <h2>Library Activity for Week of  {{ libraries.updated_at | date: "%a, %b %d, %Y" }}</h2>
     <p>
       Thank you to all of our contributors!
     </p>
     <p>
-      This week there were {{ site.data.libraries.merged_pr_count }} pull requests merged:
+      This week there were {{ libraries.merged_pr_count }} pull requests merged:
       <ul>
         <li>
           Authors:
-          {% for contributor in site.data.libraries.contributors %}
+          {% for contributor in libraries.contributors %}
             <a href="https://github.com/{{contributor}}" title="Contributor Name">{{contributor}}</a>{% if forloop.last != true %}, {% endif %}
           {% endfor %}
         </li>
         <li>
           Reviewers:
-          {% for reviewer in site.data.libraries.reviewers %}
+          {% for reviewer in libraries.reviewers %}
             <a href="https://github.com/{{reviewer}}" title="Contributor Name">{{reviewer}}</a>{% if forloop.last != true %}, {% endif %}
           {% endfor %}
         </li>
@@ -186,7 +186,7 @@ permalink: /libraries/
     <div class="libraries new">
       <h3>New Libraries</h3>
       <ul>
-      {% for library in site.data.libraries.library_updates.new %}
+      {% for library in libraries.library_updates.new %}
         <li><a href="{{library[1]}}" title="New Library Location">{{library[0]}}</a></li>
       {% endfor %}
       </ul>
@@ -194,7 +194,7 @@ permalink: /libraries/
     <div class="libraries updated">
       <h3>Updated Libraries</h3>
       <ul>
-      {% for library in site.data.libraries.library_updates.updated %}
+      {% for library in libraries.library_updates.updated %}
         <li><a href="{{library[1]}}" title="Updated Library Location">{{library[0]}}</a></li>
       {% endfor %}
       </ul>

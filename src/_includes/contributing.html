@@ -28,7 +28,7 @@ layout: common.html
     Have an idea for a new driver or library?
     <a href="https://github.com/adafruit/circuitpython/issues">File an issue on the CircuitPython repo!</a>
   </p>
-  <h2>Current Status for {{ site.data.libraries.updated_at | date: "%a, %b %d, %Y" }}</h2>
+  <h2>Current Status for {{ libraries.updated_at | date: "%a, %b %d, %Y" }}</h2>
 
   {% assign current = page.url | downcase | split: '/' %}
   <ul class='tabbed-navigation'>
