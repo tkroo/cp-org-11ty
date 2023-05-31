@@ -54,7 +54,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addCollection("issueLabels", function(collectionApi) {
         const c1 = collectionApi.getAll()[0].data.libraries;
         const libs = Object.keys(c1.open_issues);
-        const labels = ["All"];
+        const labels = [];
         const a = libs.forEach((x) => {
             c1.open_issues[x].forEach((y) => {
                 labels.push(...y.labels);

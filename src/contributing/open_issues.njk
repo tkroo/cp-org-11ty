@@ -27,8 +27,7 @@ permalink: /contributing/open-issues.html
         {% endset %}
         <li class="{{ classes }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
             {% for label in issue.labels | sort() %}
-             {% set label = label | lower | replace(' ', '-') %}
-              {% if label != 'none' %}
+              {% if label != 'None' %}
                 <span class="issue-label tag-{{ label | lower | replace(' ', '-') }}">{{label}}</span>
               {% endif %}
             {% endfor %}

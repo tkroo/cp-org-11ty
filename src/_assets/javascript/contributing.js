@@ -47,7 +47,7 @@ function issueSelectHandler(event, isPopState) {
   });
 
   // show the selected options
-  var selectedOption = selectedOption === 'all' ? 'li' : `.${selectedOption}`;
+  var selectedOption = selectedOption === 'none' ? 'li' : `.${selectedOption}`;
   var items = document.querySelectorAll(`.issues-list ${selectedOption}`);
   items.forEach(function(item) {
     item.style.display = 'block'
