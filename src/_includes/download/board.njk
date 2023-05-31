@@ -1,5 +1,7 @@
+{% set bootloader_version = bootloaders.bootloaders[family].version %}
+
 {% for version in info.versions %}
-<div class="section">
+<div class="section {% if version.stable %}stable{% else %}unstable{% endif %}">
     <h3>CircuitPython {{ version.version }}</h3>
 
     {% if version.stable %}
@@ -116,6 +118,8 @@
 </div>
 
 
+{% if bootloader_version and bootloader_id %}
+{% if family == 'esp32s2' or family == 'esp32c3' or family == 'esp32s3' %}
 <div class="section unrecommended">
   <h3>Install, Repair, or Update UF2 Bootloader</h3>
   <p>
@@ -187,8 +191,7 @@
     <a class="download-button" href="https://github.com/adafruit/tinyuf2/releases/download/{{ bootloader_version }}/tinyuf2-{{ bootloader_id }}-{{ bootloader_version }}.zip">DOWNLOAD BOOTLOADER ZIP<i class="fas fa-download" aria-hidden="true"></i></a>
  </div>
 </div>
-
-
+{% else %}
 <div class="section unrecommended">
   <h3>Update UF2 Bootloader</h3>
   <p>
@@ -207,6 +210,7 @@
     or a support person has asked you to try updating it.
   </p>
 
+  {% if family == 'nrf52840' %}
   <p>
     Updating the bootloader on nRF52840 boards is an involved process right now.
     Follow the instructions in this
@@ -219,7 +223,9 @@
   <div>
     <a class="download-button-unrecommended" href="https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/tag/{{ bootloader_version }}">BROWSE ON GITHUB<i class="fab fa-github" aria-hidden="true"></i></a>
   </div>
-  
+  {% endif %}
+
+  {% if family == 'atmel-samd' %}
   <p>
     To update, first save the contents of <b>CIRCUITPY</b>, just in case.
     Then double-click the reset button to show the <b>BOOT</b> drive.
@@ -234,5 +240,7 @@
   <div>
     <a class="download-button-unrecommended" href="https://github.com/adafruit/uf2-samdx1/releases/tag/{{ bootloader_version }}">BROWSE ON GITHUB<i class="fab fa-github" aria-hidden="true"></i></a>
   </div>
-  
+  {% endif %}
 </div>
+{% endif %}
+{% endif %}
