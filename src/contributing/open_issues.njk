@@ -14,24 +14,24 @@ permalink: /contributing/open-issues.html
     <select>
   </p>
   <h3>Open Issues</h3>
-   <ul>
+    <ul>
     {% for key, library in libraries.open_issues %}
       <li>
         {{ key }}
         <ul class="issues-list">
         {% for issue in library %}
-        {% set classes %}
-        {% for label in issue.labels | sort() %}
-          {{ label | lower | replace(' ', '-') }}
-        {% endfor %}
-        {% endset %}
-        <li class="{{ classes }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
+          {% set classes %}
+          {% for label in issue.labels | sort() %}
+            {{ label | lower | replace(' ', '-') }}
+          {% endfor %}
+          {% endset %}
+          <li class="{{ classes }}"><a href="{{ issue.url }}">{{ issue.title }}</a>
             {% for label in issue.labels | sort() %}
               {% if label != 'None' %}
                 <span class="issue-label tag-{{ label | lower | replace(' ', '-') }}">{{label}}</span>
               {% endif %}
             {% endfor %}
-        </li>
+          </li>
         {% endfor %}
         </ul>
       </li>
