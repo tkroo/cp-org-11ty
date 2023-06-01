@@ -81,7 +81,7 @@ pagination:
                             data-features="{{ board.data.features }}"
                             data-tags="{{ board.data.tags }}"
                             data-modules="{{ board.info.versions[0].modules | default(board.versions[0].modules, true) }}"
-                            data-date="{{ board.data.date_added }}">
+                            data-date="{{ board.data.date_added | formatDate }}">
         <a href="/board/{% if board.data.manufacturer == undefined %}unknown/?unknown_id={% endif %}{{ board_id | slugify }}">
           <div>
             <div class="img-responsive-4by3">
@@ -89,8 +89,9 @@ pagination:
             </div>
             <div class="details">
               <h3>{{ board.data.name | default(board.id, true)}}</h3>
-              <strong>By</strong> {{ board.data.manufacturer| default("Unknown", true) }}
-              <br><strong>downloads:</strong> {{ board.info.downloads | default("0", true) }}
+              By {{ board.data.manufacturer| default("Unknown", true) }}
+              {# <br><strong>downloads:</strong> {{ board.info.downloads | default("0", true) }}
+              <br><strong>date added:</strong> {{ board.data.date_added | formatDate }} #}
             </div>
           </div>
         </a>

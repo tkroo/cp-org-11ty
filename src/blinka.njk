@@ -77,7 +77,7 @@ pagination:
                               data-manufacturer="{{ board.data.manufacturer }}"
                               data-mcufamily="{{ board.data.family }}"
                               data-features="{{ board.data.features }}"
-                              data-date="{{ board.data.date_added }}">
+                              data-date="{{ board.data.date_added | formatDate }}">
           <a href="/blinka/{{ board.data.board_id | slugify }}">
             <div>
               <div class="img-responsive-4by3">

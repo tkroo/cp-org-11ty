@@ -5,7 +5,7 @@ name: "ESP32-S3 Box Lite"
 manufacturer: "Espressif"
 board_url: "https://www.adafruit.com/product/5511"
 board_image: "espressif_esp32s3_box_lite.jpg"
-date_added: 22-07-08
+date_added: 2022-07-08
 family: esp32s3
 features:
   - Wi-Fi

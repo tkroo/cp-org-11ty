@@ -7,7 +7,7 @@ const pluginRss = require('@11ty/eleventy-plugin-rss');
 const { Buffer } = require("node:buffer");
 const minifyHtml = require("@minify-html/node");
 const useMinifyHtml = false
-
+const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPlugin(pluginRss);
@@ -41,6 +41,11 @@ module.exports = function(eleventyConfig) {
 
     eleventyConfig.addFilter("slugify", function(value) {
         return slugify(value, '_');
+    })
+
+    eleventyConfig.addFilter("formatDate", function(value) {
+        const dateObj = value ? new Date(value+"") : new Date("1970-01-01");
+        return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("yyyy-M-d");
     })
 
     eleventyConfig.addFilter("sortByDownloads", function(arr) {
