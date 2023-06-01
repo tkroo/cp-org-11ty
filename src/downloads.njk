@@ -85,10 +85,7 @@ pagination:
         <a href="/board/{% if board.data.manufacturer == undefined %}unknown/?unknown_id={% endif %}{{ board_id | slugify }}">
           <div>
             <div class="img-responsive-4by3">
-              <img srcset="/assets/images/boards/small/{{board.data.board_image | default("unknown.jpg", true) }} 300w,
-                /assets/images/boards/large/{{ board.data.board_image | default("unknown.jpg", true) }} 700w"
-                sizes="(max-width: 1024px) 700px, 300px"
-                src="/assets/images/boards/small/{{ board.data.board_image | default("unknown.jpg", true) }}" alt="{{board.data.name | default(board.info.id ,true) }}" loading="lazy" />
+              {% include "downloads/board_image.html" %}
             </div>
             <div class="details">
               <h3>{{ board.data.name | default(board.id, true)}}</h3>
